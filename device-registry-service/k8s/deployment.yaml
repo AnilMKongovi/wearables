@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: device-registry-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: device-registry-service
+  template:
+    metadata:
+      labels:
+        app: device-registry-service
+    spec:
+      containers:
+        - name: device-registry-service
+          image: your-docker-repo/device-registry-service:latest
+          ports:
+            - containerPort: 8080

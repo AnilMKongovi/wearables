@@ -1,0 +1,9 @@
+# api-gateway-service
+
+Spring Boot microservice for the wearable platform.
+
+## Build
+mvn clean package
+
+## Run
+java -jar target/api-gateway-service.jar

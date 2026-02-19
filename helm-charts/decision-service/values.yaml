@@ -1,0 +1,5 @@
+image:
+  repository: your-docker-repo/decision-service
+  tag: latest
+service:
+  port: 80
