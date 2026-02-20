@@ -1,0 +1,28 @@
+# =============================================================
+# =============================================================
+# COMMON LIBRARIES
+# =============================================================
+# =============================================================
+
+# common-libraries/pom.xml
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <parent>
+    <groupId>com.pranaah.wearables.services</groupId>
+    <artifactId>wearables</artifactId>
+    <version>1.0.0</version>
+  </parent>
+  <artifactId>common-libraries</artifactId>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-security</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>io.jsonwebtoken</groupId>
+      <artifactId>jjwt-api</artifactId>
+      <version>0.12.5</version>
+    </dependency>
+  </dependencies>
+</project>
