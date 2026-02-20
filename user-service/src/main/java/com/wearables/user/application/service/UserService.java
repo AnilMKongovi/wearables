@@ -8,6 +8,38 @@
 */
 
 
-//package com.pranaah.wearables.auth.application.service;
+package com.pranaah.wearables.user.application.service;
+
+import com.platform.user.domain.entity.User;
+import com.platform.user.domain.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+import java.time.Instant;
+import java.util.UUID;
+
+@Service
+@RequiredArgsConstructor
+public class UserService {
+
+    private final UserRepository repository;
+
+    public UUID createUser(String email, String phone, String countryCode) {
+        User user = User.builder()
+                .id(UUID.randomUUID())
+                .email(email)
+                .phone(phone)
+                .countryCode(countryCode)
+                .status(User.Status.ACTIVE)
+                .emailVerified(false)
+                .phoneVerified(false)
+                .createdAt(Instant.now())
+                .updatedAt(Instant.now())
+                .build();
+
+        repository.save(user);
+        return user.getId();
+    }
+}
 
 

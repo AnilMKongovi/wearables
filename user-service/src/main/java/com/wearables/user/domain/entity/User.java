@@ -8,6 +8,42 @@
 */
 
 
-//package com.pranaah.wearables.auth.application.service;
+package com.pranaah.wearables.user.domain.entity;
 
+import jakarta.persistence.*;
+import lombok.*;
+import java.time.Instant;
+import java.util.UUID;
+
+@Entity
+@Table(name = "users")
+@Getter @Setter @Builder
+@NoArgsConstructor @AllArgsConstructor
+public class User {
+
+    @Id
+    private UUID id;
+
+    @Column(unique = true)
+    private String email;
+
+    @Column(unique = true)
+    private String phone;
+
+    private String countryCode;
+
+    @Enumerated(EnumType.STRING)
+    private Status status;
+
+    private Boolean emailVerified;
+    private Boolean phoneVerified;
+
+    private Instant createdAt;
+    private Instant updatedAt;
+    private Instant lastLoginAt;
+
+    public enum Status {
+        ACTIVE, INACTIVE, LOCKED, DELETED
+    }
+}
 
