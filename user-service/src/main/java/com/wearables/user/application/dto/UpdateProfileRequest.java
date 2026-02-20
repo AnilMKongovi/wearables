@@ -7,15 +7,20 @@
  * without the express written permission of Pranaah Electronics Pvt Ltd.
  */
 
-package com.wearables.user.domain.repository;
+package com.wearables.user.application.dto;
 
-import com.wearables.user.domain.entity.UserProfile;
-import org.springframework.data.jpa.repository.JpaRepository;
+import lombok.Data;
 
-import java.util.Optional;
-import java.util.UUID;
+import java.time.LocalDate;
 
-public interface UserProfileRepository extends JpaRepository<UserProfile, UUID> {
+@Data
+public class UpdateProfileRequest {
 
-    Optional<UserProfile> findByUserId(UUID userId);
+    private String firstName;
+    private String lastName;
+    private String displayName;
+    private LocalDate dateOfBirth;
+    private String gender;
+    private String avatarUrl;
+    private String bio;
 }
