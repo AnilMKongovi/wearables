@@ -1,0 +1,39 @@
+server:
+  port: 8083
+
+spring:
+  application:
+    name: device-registry-service
+
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/device_registry}
+    username: ${DB_USER:postgres}
+    password: ${DB_PASSWORD:postgres}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: ${DDL_AUTO:validate}
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+
+# JWT secret must match the value used by auth-service.
+# Override via environment variable in production.
+jwt:
+  secret: ${JWT_SECRET:very-secret-key-very-secret-key}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: always
+
+logging:
+  level:
+    com.pranaah.wearables.device: INFO
