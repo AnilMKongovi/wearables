@@ -27,6 +27,11 @@ Responsibilities
 	Throttling
 	Logging
 
+api-gateway-service (port 8080)
+Spring Cloud Gateway (reactive/Netty) replacing the servlet web stub
+JwtAuthenticationFilter (order -100): validates JWT, attaches X-User-Id + X-User-Roles headers, blocks /internal/** from external access
+RequestLoggingFilter (order -99): logs method, path, status, latency
+Routes: auth-service, user-service, device-registry, event-ingestion
 Absolutely mandatory in microservices.
 
 

@@ -33,6 +33,8 @@ java -jar target/device-registry-service.jar
 - `PUT /api/v1/devices/{deviceId}/token` — Update push subscription token (200 OK)
 - `DELETE /api/v1/devices/{deviceId}` — Deactivate a device (204 No Content)
 - `GET /api/v1/devices/user/{userId}` — List active devices for a user (200 OK)
+- `GET /api/v1/devices/internal/user/{userId}/subscriptions — returns {subscriptionId} projections, no JWT required (network-level trust)
+
 
 ### Security
 - **JwtAuthenticationFilter** — Validates Bearer tokens issued by auth-service
