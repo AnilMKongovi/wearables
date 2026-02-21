@@ -31,6 +31,9 @@ import java.util.List;
 /**
  * Validates the JWT Bearer token issued by auth-service and populates the
  * Spring Security context so downstream controllers can trust the caller's identity.
+ *
+ * <p>Uses the JJWT 0.12.x API: {@code Jwts.parser()} / {@code verifyWith} /
+ * {@code parseSignedClaims} / {@code getPayload()}.
  */
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
@@ -57,11 +60,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         String token = header.substring(7);
 
         try {
-            Claims claims = Jwts.parserBuilder()
-                    .setSigningKey(signingKey)
+            // JJWT 0.12.x API
+            Claims claims = Jwts.parser()
+                    .verifyWith(signingKey)
                     .build()
-                    .parseClaimsJws(token)
-                    .getBody();
+                    .parseSignedClaims(token)
+                    .getPayload();
 
             String subject = claims.getSubject();
             String roles = (String) claims.get("roles");
