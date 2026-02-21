@@ -33,6 +33,11 @@ spring:
           predicates:
             - Path=/api/v1/events/**
 
+        - id: warranty-service
+          uri: ${WARRANTY_SERVICE_URL:http://warranty-service:8087}
+          predicates:
+            - Path=/api/v1/warranties/**
+
 # JWT secret shared across all platform services.
 # Must be >= 32 bytes. Override via environment variable in production.
 jwt:

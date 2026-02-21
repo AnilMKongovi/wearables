@@ -1,0 +1,56 @@
+server:
+  port: 8088
+
+spring:
+  application:
+    name: claim-service
+
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/claim_service}
+    username: ${DB_USER:postgres}
+    password: ${DB_PASSWORD:postgres}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      acks: all
+      retries: 3
+
+# URL of the warranty-service for warranty validation calls.
+warranty:
+  service:
+    url: ${WARRANTY_SERVICE_URL:http://localhost:8087}
+
+# JWT secret shared across all platform services.
+# Must be >= 32 bytes. Override via environment variable in production.
+jwt:
+  secret: ${JWT_SECRET:wearables-platform-jwt-secret-32}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: always
+
+logging:
+  level:
+    com.wearables.claim: INFO
