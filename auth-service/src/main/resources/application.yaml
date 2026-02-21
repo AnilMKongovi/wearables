@@ -1,12 +1,12 @@
 server:
-  port: 8083
+  port: 8081
 
 spring:
   application:
-    name: device-registry-service
+    name: auth-service
 
   datasource:
-    url: ${DB_URL:jdbc:postgresql://localhost:5432/device_registry}
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/auth_service}
     username: ${DB_USER:postgres}
     password: ${DB_PASSWORD:postgres}
     driver-class-name: org.postgresql.Driver
@@ -20,8 +20,17 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
 
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+      password: ${REDIS_PASSWORD:}
+
 # JWT secret shared across all platform services.
-# Must be >= 32 bytes (256 bits) for HMAC-SHA256. Override in production.
+# Must be >= 32 bytes. Override via environment variable in production.
 jwt:
   secret: ${JWT_SECRET:wearables-platform-jwt-secret-32}
 
@@ -36,4 +45,4 @@ management:
 
 logging:
   level:
-    com.pranaah.wearables.device: INFO
+    com.wearables.auth: INFO

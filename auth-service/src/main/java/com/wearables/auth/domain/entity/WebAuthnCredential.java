@@ -9,7 +9,7 @@
 
 // WebAuthn Credential (Passkey)
 
-package com.pranaah.wearables.auth.domain.entity;
+package com.wearables.auth.domain.entity;
 
 import jakarta.persistence.*;
 import lombok.*;

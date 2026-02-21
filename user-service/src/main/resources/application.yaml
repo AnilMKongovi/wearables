@@ -32,10 +32,10 @@ spring:
       port: ${REDIS_PORT:6379}
       password: ${REDIS_PASSWORD:}
 
-# JWT secret must match the value used by auth-service.
-# Override via environment variable in production.
+# JWT secret shared across all platform services.
+# Must be >= 32 bytes (256 bits) for HMAC-SHA256. Override in production.
 jwt:
-  secret: ${JWT_SECRET:very-secret-key-very-secret-key}
+  secret: ${JWT_SECRET:wearables-platform-jwt-secret-32}
 
 clients:
   auth-service:

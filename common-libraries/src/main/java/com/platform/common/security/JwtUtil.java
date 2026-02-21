@@ -8,7 +8,7 @@
 */
 
 
-package com.pranaah.wearables.common.security;
+package com.platform.common.security;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
