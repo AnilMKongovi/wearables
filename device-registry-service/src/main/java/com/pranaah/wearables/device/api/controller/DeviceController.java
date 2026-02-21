@@ -86,4 +86,26 @@ public class DeviceController {
             @PathVariable UUID userId) {
         return ResponseEntity.ok(deviceService.getActiveDevicesForUser(userId));
     }
+
+    /**
+     * GET /api/v1/devices/internal/user/{userId}/subscriptions
+     *
+     * <p><b>Internal endpoint — not routed via the API gateway.</b>
+     * Returns only the push subscription IDs (FCM/APNs tokens) for all active
+     * devices owned by the user. Called by notification-service to build the
+     * OneSignal recipient list without transferring full device records.
+     *
+     * @return 200 OK — list of {@code { "subscriptionId": "..." }} objects.
+     */
+    @GetMapping("/internal/user/{userId}/subscriptions")
+    public ResponseEntity<List<SubscriptionIdView>> getSubscriptionIds(@PathVariable UUID userId) {
+        List<SubscriptionIdView> ids = deviceService.getActiveDevicesForUser(userId).stream()
+                .filter(d -> d.getSubscriptionId() != null && !d.getSubscriptionId().isBlank())
+                .map(d -> new SubscriptionIdView(d.getSubscriptionId()))
+                .toList();
+        return ResponseEntity.ok(ids);
+    }
+
+    /** Minimal projection returned by the internal subscription-ID endpoint. */
+    record SubscriptionIdView(String subscriptionId) {}
 }
