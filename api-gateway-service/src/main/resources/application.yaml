@@ -33,10 +33,25 @@ spring:
           predicates:
             - Path=/api/v1/events/**
 
+        - id: claim-service
+          uri: ${CLAIM_SERVICE_URL:http://claim-service:8088}
+          predicates:
+            - Path=/api/v1/warranties/*/claims, /api/v1/warranties/*/claims/**
+
         - id: warranty-service
           uri: ${WARRANTY_SERVICE_URL:http://warranty-service:8087}
           predicates:
             - Path=/api/v1/warranties/**
+
+        - id: consent-service-consents
+          uri: ${CONSENT_SERVICE_URL:http://consent-service:8089}
+          predicates:
+            - Path=/api/v1/consents/**
+
+        - id: consent-service-preferences
+          uri: ${CONSENT_SERVICE_URL:http://consent-service:8089}
+          predicates:
+            - Path=/api/v1/preferences/**
 
 # JWT secret shared across all platform services.
 # Must be >= 32 bytes. Override via environment variable in production.
