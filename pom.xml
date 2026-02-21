@@ -23,6 +23,8 @@
     <module>consent-service</module>
     <module>decision-service</module>
     <module>scheduler-service</module>
+    <module>warranty-service</module>
+    <module>claim-service</module>
   </modules>
 
   <properties>
